@@ -25,8 +25,8 @@ def available_vaccines():
                                   id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView_GridViewRow{row_num}_Label_location_{row_num}"
                                   .format(row_num=str(i))).text
             spots = table.find("span",
-                              id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView_GridViewRow{row_num}_Label_numberopenings_{row_num}"
-                              .format(row_num=str(i))).text
+                               id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView_GridViewRow{row_num}_Label_numberopenings_{row_num}"
+                               .format(row_num=str(i))).text
             if spots == "0" or spots == "Waiting List":
                 continue
             print(location + ": " + spots)
