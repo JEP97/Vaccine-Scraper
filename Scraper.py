@@ -18,14 +18,20 @@ def available_vaccines():
             continue
 
         soup = bs.BeautifulSoup(source.text, 'html.parser')
-        location = soup.find("span",
-                             id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView_GridViewRow1_Label_location_1").text
-        spots = soup.find("span",
-                          id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView_GridViewRow1_Label_numberopenings_1").text
-        if spots == "0" or spots == "Waiting List":
-            continue
-        print(location + ": " + spots)
-    print("Scrape completed")
+        table = soup.find(id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView")
+        number_of_rows = len(table.findAll("tr")) - 2
+        for i in range(1, number_of_rows + 1):
+            location = table.find("span",
+                                  id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView_GridViewRow{row_num}_Label_location_{row_num}"
+                                  .format(row_num=str(i))).text
+            spots = table.find("span",
+                              id="ctl05_ctlSearchLayout_ctl01_ctl01_ctlIPGridView_GridViewRow{row_num}_Label_numberopenings_{row_num}"
+                              .format(row_num=str(i))).text
+            if spots == "0" or spots == "Waiting List":
+                continue
+            print(location + ": " + spots)
+
+    print("--------Scrape completed--------")
 
 
 def time_manager():
