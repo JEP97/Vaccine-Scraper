@@ -37,7 +37,7 @@ def available_vaccines():
             if spots == "0" or spots == "Waiting List":
                 continue
             # Print results to console
-            print(location + ": " + spots)
+            print(location + ": " + spots + " URL: " + url.format(center_id=id_num))
 
     print("--------Scrape completed--------")
 
